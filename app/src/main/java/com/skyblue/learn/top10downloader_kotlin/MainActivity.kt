@@ -13,15 +13,23 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         Log.d(TAG, "onCreateCalled")
+        val downloadData = DownloadData()
+        downloadData.execute("URL goes here")
+        Log.d(TAG, "onCreate: done")
     }
 
-    private inner class DownloadData : AsyncTask<String, Void, String>() {
-        override fun onPostExecute(result: String?) {
-            super.onPostExecute(result)
-        }
+    companion object {
+        private class DownloadData : AsyncTask<String, Void, String>() {
+            private val TAG = "DownloadData"
+            override fun onPostExecute(result: String?) {
+                super.onPostExecute(result)
+                Log.d(TAG, "onPostExecute: parameter is $result")
+            }
 
-        override fun doInBackground(vararg params: String?): String {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            override fun doInBackground(vararg params: String?): String {
+                Log.d(TAG, "doInBackground: starts with ${params[0]}")
+                return "doInBackground completed"
+            }
         }
     }
 
